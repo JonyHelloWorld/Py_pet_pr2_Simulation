@@ -1,11 +1,11 @@
 import json
 import logging.config
-from modul.Map import Map
-from modul.Grass import Grass
-from modul.Rock import Rock
-from modul.Tree import Tree
-from modul.Herbivore import Herbivore
-from modul.Predator import Predator
+from modul.map import Map
+from modul.grass import Grass
+from modul.rock import Rock
+from modul.tree import Tree
+from modul.herbivore import Herbivore
+from modul.predator import Predator
 import time
 import random
 import re

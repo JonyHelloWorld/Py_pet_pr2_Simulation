@@ -1,4 +1,4 @@
-from modul.Creature import Creature
+from modul.creature import Creature
 from logging import getLogger
 
 logger = getLogger(__name__)

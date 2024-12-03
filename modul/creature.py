@@ -1,4 +1,4 @@
-from modul.Entity import Entity
+from modul.entity import Entity
 from collections import deque
 from logging import getLogger
 

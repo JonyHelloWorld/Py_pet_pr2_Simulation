@@ -1,4 +1,4 @@
-from modul.Entity import Entity
+from modul.entity import Entity
 from logging import getLogger
 
 logger = getLogger(__name__)
