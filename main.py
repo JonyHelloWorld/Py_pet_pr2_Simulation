@@ -1,17 +1,18 @@
 import json
 import logging.config
-from modul.map import Map
-from modul.grass import Grass
-from modul.rock import Rock
-from modul.tree import Tree
-from modul.herbivore import Herbivore
-from modul.predator import Predator
 import time
 import random
-import re
 import threading
 
+from src.map import Map
+from src.entities.grass import Grass
+from src.entities.rock import Rock
+from src.entities.tree import Tree
+from src.entities.creatures.herbivore import Herbivore
+from src.entities.creatures.predator import Predator
+
 from logging import getLogger # basicConfig, DEBUG, INFO, ERROR, FileHandler, StreamHandler
+
 
 # 2 варианта настройки логирования (считать настройки из файла или прописать их в коде)
 try:
@@ -35,6 +36,7 @@ logger = getLogger()#
 is_exit = threading.Event()
 is_exit.set() # включил
 
+
 class Simulation:
     """
     класс Симуляция в котором создаем карту, сущности и запускаем бесконечную симуляцию
@@ -46,6 +48,7 @@ class Simulation:
         self.create_an_entity(rows, Rock, rows // 2)
         self.create_an_entity(rows, Herbivore, rows // 3)
         self.create_an_entity(rows, Predator, rows // 3)
+
 
     def create_an_entity(self, rows, entity, quantity_entity = None):
         """
@@ -63,7 +66,6 @@ class Simulation:
                     col = random.randint(1, rows)
                 obj = entity(row, col, self.map_instance)
                 self.map_instance.add_in_dic(row, col, obj)
-
         else: # генерация сущностей в процессе игры
             for i in range(1, quantity_entity):
                 row = random.randint(1, rows)
@@ -126,6 +128,7 @@ logger.info("генерирую карту")
 
 simulation.render_map()
 logger.info('мир создан и заселён, \nзапустить бесконечную симуляцию?')
+
 # создал поток и запустил
 thread_simulation = threading.Thread(target = simulation.begin_simulation, daemon = True,)
 thread_simulation.start()

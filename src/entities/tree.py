@@ -1,4 +1,4 @@
-from modul.entity import Entity
+from src.entities.entity import Entity
 
 class Tree(Entity):
     """

@@ -1,8 +1,11 @@
-from modul.entity import Entity
 from collections import deque
 from logging import getLogger
 
+from src.entities.entity import Entity
+
+
 logger = getLogger(__name__)
+
 
 class Creature(Entity):
     """
@@ -14,14 +17,15 @@ class Creature(Entity):
         self.speed = speed
         self.attack = attack
 
+
     # @abc.abstractmethod
     def make_move(self):
         """
         метод перемещения существа
         """
         logger.debug("%s на позиции (%s, %s) вызываю поиск цели", self.avatar, self.row, self.col)
-
         path = self.breadth_first_search()
+
         if not path:
             logger.debug("Путь не найден")
             return
@@ -29,13 +33,10 @@ class Creature(Entity):
         # ограничиваем длину пути скоростью сущности
         move_steps = min(self.speed, len(path))
         new_coordinates = path[:move_steps][-1]  # обрезаем путь до значения скорости и берем предпоследний элемент
-
         logger.debug(f"Путь: {path}, новые координаты: {new_coordinates}")
-
         obj = self.map_instance.cut_from_dic(self.row, self.col)
         row, col = new_coordinates
         self.map_instance.add_in_dic(row, col, obj)
-
         obj.row, obj.col = new_coordinates  # обновляем координаты внутри объекта
         logger.debug("%s переместился на (%s, %s)", self.avatar, new_coordinates[0], new_coordinates[1])
 
@@ -50,7 +51,6 @@ class Creature(Entity):
         while queue_coordinats:
             (coordinats, path) = queue_coordinats.popleft()  # извлекаем первый элемент из очереди
             row, col = coordinats  # распаковываем координаты
-
             # если координаты уже проверены, переходим к следующему в очереди
             if coordinats in searched_coordinats:
                 continue
@@ -78,7 +78,6 @@ class Creature(Entity):
                 if (self.map_instance.is_coordinate_in_map(new_row, new_col) and
                     self.map_instance.is_coordinate_empty_grass_or_herbivore(new_row, new_col, self.avatar) and
                     new_coords not in searched_coordinats):
-
                     queue_coordinats.append((new_coords, path + [new_coords]))
                     logger.debug(f"Добавляю в очередь: {new_coords}, текущий путь: {path + [new_coords]}")
 

@@ -1,5 +1,6 @@
-from modul.entity import Entity
 from logging import getLogger
+
+from src.entities.entity import Entity
 
 logger = getLogger(__name__)
 

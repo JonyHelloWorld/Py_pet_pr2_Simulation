@@ -1,6 +1,8 @@
 from logging import getLogger
 
+
 logger = getLogger(__name__)
+
 
 class Map:
     """
@@ -10,6 +12,7 @@ class Map:
         self.rows = rows
         self.cols = cols
         self._dic = {}
+
 
     def is_coordinate_empty(self, row, col):
         """
@@ -78,7 +81,6 @@ class Map:
                         return True
                     else:
                         return False
-
 
     def is_coordinate_in_map(self, row, col):
         """

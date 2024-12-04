@@ -1,7 +1,10 @@
-from modul.creature import Creature
 from logging import getLogger
 
+from src.entities.creatures.creature import Creature
+
+
 logger = getLogger(__name__)
+
 
 class Predator(Creature):
     """
@@ -9,6 +12,7 @@ class Predator(Creature):
     """
     def __init__(self, row, col, map_instance):
         super().__init__(row=row, col=col, hp=100, speed=1, avatar="\U0001F981", map_instance=map_instance, attack=50)
+
 
     def make_move(self):
         """
@@ -18,6 +22,7 @@ class Predator(Creature):
         result_attack = self.do_attack()
         is_target, path = result_attack
         logger.debug("вызываю метод attack (is_target, path) (%s, %s)", is_target, path)
+
         if is_target:
             logger.debug(f"Путь: {path}")
             obj = self.map_instance.cut_from_dic(self.row, self.col)
@@ -30,11 +35,9 @@ class Predator(Creature):
             if not path:
                 logger.debug("Путь не найден")
                 return
-
-                # ограничиваем длину пути скоростью сущности
+            # ограничиваем длину пути скоростью сущности
             move_steps = min(self.speed, len(path))
             new_coordinates = path[:move_steps][-1]  # обрезаем путь до значения скорости и берем предпоследний элемент
-
             logger.debug(f"Путь: {path}, новые координаты: {new_coordinates}")
             obj = self.map_instance.cut_from_dic(self.row, self.col)
             row, col = new_coordinates
