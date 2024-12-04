@@ -57,9 +57,9 @@ class Predator(Creature):
 
             if self.map_instance.is_coordinate_in_map(new_row, new_col) and target_obj and target_obj.avatar == "\U0001F407":
                 self.map_instance._dic[new_coords].hp -= self.map_instance._dic[(self.row, self.col)].attack
-                logger.debug("%s нашел зайца и атаковал, осталось ХР %s ", self.avatar, self.map_instance._dic[new_coords].hp)
+                logger.info("%s нашел зайца и атаковал, осталось ХР %s ", self.avatar, self.map_instance._dic[new_coords].hp)
                 if self.map_instance._dic[new_coords].hp <= 0:
-                    logger.debug("Лев съел зайца на %s", new_coords)
+                    logger.info("Лев съел зайца на %s", new_coords)
                     path = (new_row, new_col) # съел и перешел на новую клетку
                     logger.debug("path из do_attack %s", path)
                     logger.debug("isinstance(path, tuple), %s", isinstance(path, tuple))

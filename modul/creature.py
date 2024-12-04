@@ -82,6 +82,6 @@ class Creature(Entity):
                     queue_coordinats.append((new_coords, path + [new_coords]))
                     logger.debug(f"Добавляю в очередь: {new_coords}, текущий путь: {path + [new_coords]}")
 
-        logger.debug("Путь не найден")
+        logger.info("Путь не найден")
         return None
 

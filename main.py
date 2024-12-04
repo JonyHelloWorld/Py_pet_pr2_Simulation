@@ -122,10 +122,10 @@ class Simulation:
 
 size_map = int(input("введите размер карты \n"))
 simulation = Simulation(size_map, size_map)
-logger.debug("генерирую карту")
+logger.info("генерирую карту")
 
 simulation.render_map()
-print('мир создан и заселён, \nзапустить бесконечную симуляцию?')
+logger.info('мир создан и заселён, \nзапустить бесконечную симуляцию?')
 # создал поток и запустил
 thread_simulation = threading.Thread(target = simulation.begin_simulation, daemon = True,)
 thread_simulation.start()
